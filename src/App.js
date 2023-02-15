@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import FormAddTask from "./components/FormAddTask";
+import Task from "./components/Task";
+import TaskList from "./components/TaskList";
+import Wrapper from "./components/Wrapper";
+import { TaskContext } from "./Context/TaskContext";
 
 function App() {
+  const { tasks } = useContext(TaskContext);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Wrapper>
+        <FormAddTask />
+        <TaskList>
+          {tasks.map((task, i) => (
+            <Task key={i} value={task} />
+          ))}
+        </TaskList>
+      </Wrapper>
     </div>
   );
 }
